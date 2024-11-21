@@ -24,6 +24,8 @@ import {
   Logo,
 } from "@/components/icons";
 
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
 export const Navbar = () => {
   const searchInput = (
     <Input
@@ -80,7 +82,7 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>        
         <NavbarItem className="hidden md:flex">
-          <Button
+          {/* <Button
             isExternal
             as={Link}
             className="text-sm font-normal text-default-600 bg-default-100"
@@ -89,7 +91,8 @@ export const Navbar = () => {
             variant="flat"
           >
             Connect Wallet
-          </Button>
+          </Button> */}
+          <ConnectButton />
         </NavbarItem>
       </NavbarContent>
 
