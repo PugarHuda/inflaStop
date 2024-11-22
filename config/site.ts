@@ -9,24 +9,8 @@ export const siteConfig = {
       href: "/",
     },
     {
-      label: "Dashboard",
-      href: "/dashboard",
-    },
-    {
-      label: "Deposit",
-      href: "/deposit",
-    },
-    {
-      label: "Withdraw",
-      href: "/withdraw",
-    },
-    {
-      label: "Swap",
-      href: "/swap",
-    },
-    {
-      label: "Proof",
-      href: "/proof",
+      label: "Borrow",
+      href: "/borrow",
     },
   ],
   navMenuItems: [

@@ -20,9 +20,8 @@ export default function DocsPage() {
   }, [page, users]);
 
   return (
-    <div>
-      <h1 className={title()}>Withdraw</h1>
-      <div className="w-100 mt-10 flex justify-center">
+    <div>      
+      <div className="w-100 flex justify-center">
         <Card className="min-w-[500px]">
           <CardHeader className="flex gap-3">
             <div className="flex flex-col text-start">
