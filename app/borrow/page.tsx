@@ -2,62 +2,80 @@
 
 import React from "react";
 import { title } from "@/components/primitives";
-import { Card, CardHeader, CardBody, CardFooter, Divider, Input, Button, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Pagination, getKeyValue, } from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  Input,
+  Button,
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Pagination,
+  getKeyValue,
+} from "@nextui-org/react";
 import { users } from "./data";
-import { WagmiProvider, useWaitForTransactionReceipt, useWriteContract, useReadContract } from 'wagmi';
+import {
+  WagmiProvider,
+  useWaitForTransactionReceipt,
+  useWriteContract,
+  useReadContract,
+} from "wagmi";
 import { erc20Abi } from "viem";
-import VaultABI from '../abis/VaultABI.json';
+import VaultABI from "../abis/VaultABI.json";
 
 export default function DocsPage() {
-
   const { data: balance } = useReadContract({
     abi: erc20Abi,
-    address: '0x4c9EDD5852cd905f086C759E8383e09bff1E68B3',
-    functionName: 'balanceOf',
-    args: ['0x88a1493366D48225fc3cEFbdae9eBb23E323Ade3'],
+    address: "0x4c9EDD5852cd905f086C759E8383e09bff1E68B3",
+    functionName: "balanceOf",
+    args: ["0x88a1493366D48225fc3cEFbdae9eBb23E323Ade3"],
   });
 
   const {
     data: approvalHash,
     isPending: isApprovalPending,
-    writeContract: writeApproval
+    writeContract: writeApproval,
   } = useWriteContract();
 
   const handleApproval = async () => {
     await writeApproval({
       abi: erc20Abi,
-      address: '0x4c9edd5852cd905f086c759e8383e09bff1e68b3',
-      functionName: 'approve',
-      args: ['0xF62eEc897fa5ef36a957702AA4a45B58fE8Fe312', BigInt(1000)],
+      address: "0x4c9edd5852cd905f086c759e8383e09bff1e68b3",
+      functionName: "approve",
+      args: ["0xF62eEc897fa5ef36a957702AA4a45B58fE8Fe312", BigInt(1000)],
     });
   };
 
-  const {
-    isLoading: isApprovalLoading, status: statusApproval
-  } = useWaitForTransactionReceipt({
-    hash: approvalHash,
-  });
+  const { isLoading: isApprovalLoading, status: statusApproval } =
+    useWaitForTransactionReceipt({
+      hash: approvalHash,
+    });
 
   const {
     data: depositHash,
     isPending: isDepositPending,
-    writeContract: writeDeposit
+    writeContract: writeDeposit,
   } = useWriteContract();
 
   const handleDeposit = async () => {
     await writeDeposit({
       abi: VaultABI,
-      address: '0xF62eEc897fa5ef36a957702AA4a45B58fE8Fe312',
-      functionName: 'deposit',
+      address: "0x95271E008F552067AFbB59571F18B37F16da3D0e",
+      functionName: "deposit",
       args: [BigInt(1000)],
     });
   };
 
-  const {
-    isLoading: isDepositLoading, status: statusDeposit
-  } = useWaitForTransactionReceipt({
-    hash: depositHash,
-  });
+  const { isLoading: isDepositLoading, status: statusDeposit } =
+    useWaitForTransactionReceipt({
+      hash: depositHash,
+    });
 
   return (
     <div>
@@ -179,26 +197,52 @@ export default function DocsPage() {
                 </Button>
               </CardFooter>
             </Card>
-            <Button className="mt-3" fullWidth size="md" color="primary" variant="shadow">
+            <Button
+              className="mt-3"
+              fullWidth
+              size="md"
+              color="primary"
+              variant="shadow"
+            >
               Borrow
             </Button>
           </div>
         </div>
         <div className="text-start">
           <div>Balance: {balance?.toString()}</div>
-          <Button onClick={() => handleApproval()} className="mt-4" fullWidth size="md" color="primary" variant="shadow">
+          <Button
+            onClick={() => handleApproval()}
+            className="mt-4"
+            fullWidth
+            size="md"
+            color="primary"
+            variant="shadow"
+          >
             Approve
           </Button>
-          <div className="mt-4">Pending: {isApprovalPending ? 'Sedang approve' : 'tidak sedang approve'}</div>
+          <div className="mt-4">
+            Pending:{" "}
+            {isApprovalPending ? "Sedang approve" : "tidak sedang approve"}
+          </div>
           <div>Approval Hash: {approvalHash}</div>
-          { isApprovalLoading ? <div>Status: {statusApproval}</div> : null }
+          {isApprovalLoading ? <div>Status: {statusApproval}</div> : null}
           <div>Status: {statusApproval}</div>
-          <Button onClick={() => handleDeposit()} className="mt-4" fullWidth size="md" color="primary" variant="shadow">
+          <Button
+            onClick={() => handleDeposit()}
+            className="mt-4"
+            fullWidth
+            size="md"
+            color="primary"
+            variant="shadow"
+          >
             Deposit
           </Button>
-          <div className="mt-4">Pending: {isDepositPending ? 'Sedang deposit' : 'tidak sedang deposit'}</div>
+          <div className="mt-4">
+            Pending:{" "}
+            {isDepositPending ? "Sedang deposit" : "tidak sedang deposit"}
+          </div>
           <div>Deposit Hash: {depositHash}</div>
-          { isDepositLoading ? <div>Status: {statusDeposit}</div> : null }
+          {isDepositLoading ? <div>Status: {statusDeposit}</div> : null}
           <div>Status: {statusDeposit}</div>
         </div>
       </div>
