@@ -25,34 +25,36 @@ import {
 } from "@tanstack/react-query";
 
 const mainnet = {
-  id: 1,
-  name: 'Ethereum',
-  nativeCurrency: { name: 'Ether', symbol: 'ETH', decimals: 18 },
+  id: 17000,
+  name: 'Holesky',
+  nativeCurrency: { name: 'Holesky Ether', symbol: 'ETH', decimals: 18 },
   rpcUrls: {
     default: {
-      http: ['https://virtual.mainnet.rpc.tenderly.co/3f59caed-35bb-496d-9b3d-40f299ec6f16'],
+      http: ['https://virtual.holesky.rpc.tenderly.co/6faace5f-17e7-4df1-b9f5-61137b55ca63'],
     },
   },
   blockExplorers: {
     default: {
       name: 'Etherscan',
-      url: 'https://etherscan.io',
-      apiUrl: 'https://api.etherscan.io/api',
+      url: 'https://holesky.etherscan.io',
+      apiUrl: 'https://api-holesky.etherscan.io/api',
     },
   },
   contracts: {
-    ensRegistry: {
-      address: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
-    },
-    ensUniversalResolver: {
-      address: '0xce01f8eee7E479C928F8919abD53E553a36CeF67',
-      blockCreated: 19_258_213,
-    },
     multicall3: {
       address: '0xca11bde05977b3631167028862be2a173976ca11',
-      blockCreated: 14_353_601,
+      blockCreated: 77,
+    },
+    ensRegistry: {
+      address: '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e',
+      blockCreated: 801613,
+    },
+    ensUniversalResolver: {
+      address: '0xa6AC935D4971E3CD133b950aE053bECD16fE7f3b',
+      blockCreated: 973484,
     },
   },
+  testnet: true,
 } as const satisfies Chain;
 
 const config = getDefaultConfig({

@@ -12,9 +12,9 @@ export default function DocsPage() {
 
   const { data: balance } = useReadContract({
     abi: erc20Abi,
-    address: '0x4c9EDD5852cd905f086C759E8383e09bff1E68B3',
+    address: '0x04392363e80364d10bddb2318297277d50f50c43',
     functionName: 'balanceOf',
-    args: ['0x88a1493366D48225fc3cEFbdae9eBb23E323Ade3'],
+    args: ['0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248'],
   });
 
   const {
@@ -26,9 +26,9 @@ export default function DocsPage() {
   const handleApproval = async () => {
     await writeApproval({
       abi: erc20Abi,
-      address: '0x4c9edd5852cd905f086c759e8383e09bff1e68b3',
+      address: '0x04392363e80364d10bddb2318297277d50f50c43',
       functionName: 'approve',
-      args: ['0xF62eEc897fa5ef36a957702AA4a45B58fE8Fe312', BigInt(1000)],
+      args: ['0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248', BigInt(1000)],
     });
   };
 
@@ -39,24 +39,24 @@ export default function DocsPage() {
   });
 
   const {
-    data: depositHash,
-    isPending: isDepositPending,
-    writeContract: writeDeposit
+    data: mintHash,
+    isPending: isMintPending,
+    writeContract: writeMint
   } = useWriteContract();
 
-  const handleDeposit = async () => {
-    await writeDeposit({
+  const handleMint = async () => {
+    await writeMint({
       abi: VaultABI,
-      address: '0xF62eEc897fa5ef36a957702AA4a45B58fE8Fe312',
-      functionName: 'deposit',
-      args: [BigInt(1000)],
+      address: '0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248',
+      functionName: 'mint',
+      args: [BigInt(1000), BigInt(100)],
     });
   };
 
   const {
-    isLoading: isDepositLoading, status: statusDeposit
+    isLoading: isMintLoading, status: statusMint
   } = useWaitForTransactionReceipt({
-    hash: depositHash,
+    hash: mintHash,
   });
 
   return (
@@ -67,39 +67,22 @@ export default function DocsPage() {
             <Card className="w-100">
               <CardHeader className="flex gap-3">
                 <div className="flex flex-col text-start">
-                  <p className="text-md">Deposit</p>
+                  <p className="text-md">Mint</p>
                 </div>
-              </CardHeader>
-              <Divider />
+              </CardHeader>              
               <CardBody>
-                <Input type="number" label="Amount" placeholder="0.00" />
-                <div className="flex gap-2">
-                  <div className="p-4 flex-grow">
-                    <p>AICoin</p>
-                    <p className="text-sm opacity-50">Realtime</p>
-                    <p className="text-sm opacity-50">Rate 1-1</p>
-                  </div>
-                  <div className="p-4 flex-grow">
-                    <p>Available Soon</p>
-                    <p className="text-sm opacity-50">-</p>
-                    <p className="text-sm opacity-50">Rate -</p>
-                  </div>
-                </div>
-                <div className="flex justify-between">
-                  <p className="text-sm">Est. processing time</p>
-                  <p className="text-sm text-end">~20 seconds</p>
-                </div>
-                <div className="flex justify-between">
-                  <p className="text-sm">Network fee</p>
-                  <p className="text-sm text-end">-</p>
-                </div>
+                <Input
+                  type="number"
+                  label="Insert amount to mint"
+                  placeholder="0.0"
+                  labelPlacement="inside"
+                  startContent={
+                    <div className="pointer-events-none flex items-center">
+                      <span className="text-default-400 text-small">USDe</span>
+                    </div>
+                  }
+                />
               </CardBody>
-              <Divider />
-              <CardFooter>
-                <Button fullWidth size="md" color="primary" variant="shadow">
-                  Withdraw
-                </Button>
-              </CardFooter>
             </Card>
           </div>
           <div>
@@ -108,76 +91,36 @@ export default function DocsPage() {
                 <div className="flex flex-col text-start">
                   <p className="text-md">Borrow</p>
                 </div>
-              </CardHeader>
-              <Divider />
+              </CardHeader>              
               <CardBody>
-                <Input type="number" label="Amount" placeholder="0.00" />
-                <div className="flex gap-2">
-                  <div className="p-4 flex-grow">
-                    <p>AICoin</p>
-                    <p className="text-sm opacity-50">Realtime</p>
-                    <p className="text-sm opacity-50">Rate 1-1</p>
-                  </div>
-                  <div className="p-4 flex-grow">
-                    <p>Available Soon</p>
-                    <p className="text-sm opacity-50">-</p>
-                    <p className="text-sm opacity-50">Rate -</p>
-                  </div>
-                </div>
-                <div className="flex justify-between">
-                  <p className="text-sm">Est. processing time</p>
-                  <p className="text-sm text-end">~20 seconds</p>
-                </div>
-                <div className="flex justify-between">
-                  <p className="text-sm">Network fee</p>
-                  <p className="text-sm text-end">-</p>
-                </div>
+                <Input
+                  type="number"
+                  label="Insert amount you want to borrow"
+                  placeholder="0"
+                  labelPlacement="inside"
+                  startContent={
+                    <div className="pointer-events-none flex items-center">
+                      <span className="text-default-400 text-small">IDR</span>
+                    </div>
+                  }
+                />
               </CardBody>
-              <Divider />
-              <CardFooter>
-                <Button fullWidth size="md" color="primary" variant="shadow">
-                  Withdraw
-                </Button>
-              </CardFooter>
             </Card>
           </div>
           <div className="col-span-2">
             <Card className="w-100">
               <CardHeader className="flex gap-3">
-                <div className="flex flex-col text-start">
-                  <p className="text-md">Deposit</p>
+                <div className="flex flex-col text-start w-full">
+                  <p className="text-md">Loan to Value (LTV)</p>
+                  <p className="text-sm opacity-50">Ratio of the collateral value to the borrowed value</p>
                 </div>
-              </CardHeader>
-              <Divider />
-              <CardBody>
-                <Input type="number" label="Amount" placeholder="0.00" />
-                <div className="flex gap-2">
-                  <div className="p-4 flex-grow">
-                    <p>AICoin</p>
-                    <p className="text-sm opacity-50">Realtime</p>
-                    <p className="text-sm opacity-50">Rate 1-1</p>
-                  </div>
-                  <div className="p-4 flex-grow">
-                    <p>Available Soon</p>
-                    <p className="text-sm opacity-50">-</p>
-                    <p className="text-sm opacity-50">Rate -</p>
-                  </div>
+                <div className="flex flex-col text-end w-full">
+                  <p className="text-md">0.00%</p>
+                  <p className="text-sm opacity-50">max. 79.00%</p>
                 </div>
-                <div className="flex justify-between">
-                  <p className="text-sm">Est. processing time</p>
-                  <p className="text-sm text-end">~20 seconds</p>
-                </div>
-                <div className="flex justify-between">
-                  <p className="text-sm">Network fee</p>
-                  <p className="text-sm text-end">-</p>
-                </div>
-              </CardBody>
-              <Divider />
-              <CardFooter>
-                <Button fullWidth size="md" color="primary" variant="shadow">
-                  Withdraw
-                </Button>
-              </CardFooter>
+              </CardHeader>              
+              <CardBody>                
+              </CardBody>              
             </Card>
             <Button className="mt-3" fullWidth size="md" color="primary" variant="shadow">
               Borrow
@@ -191,15 +134,15 @@ export default function DocsPage() {
           </Button>
           <div className="mt-4">Pending: {isApprovalPending ? 'Sedang approve' : 'tidak sedang approve'}</div>
           <div>Approval Hash: {approvalHash}</div>
-          { isApprovalLoading ? <div>Status: {statusApproval}</div> : null }
+          {isApprovalLoading ? <div>Status: {statusApproval}</div> : null}
           <div>Status: {statusApproval}</div>
-          <Button onClick={() => handleDeposit()} className="mt-4" fullWidth size="md" color="primary" variant="shadow">
-            Deposit
+          <Button onClick={() => handleMint()} className="mt-4" fullWidth size="md" color="primary" variant="shadow">
+            Mint
           </Button>
-          <div className="mt-4">Pending: {isDepositPending ? 'Sedang deposit' : 'tidak sedang deposit'}</div>
-          <div>Deposit Hash: {depositHash}</div>
-          { isDepositLoading ? <div>Status: {statusDeposit}</div> : null }
-          <div>Status: {statusDeposit}</div>
+          <div className="mt-4">Pending: {isMintPending ? 'Sedang mint' : 'tidak sedang mint'}</div>
+          <div>Mint Hash: {mintHash}</div>
+          {isMintLoading ? <div>Status: {statusMint}</div> : null}
+          <div>Status: {statusMint}</div>
         </div>
       </div>
     </div>
