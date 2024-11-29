@@ -38,7 +38,7 @@ export default function BorrowPage() {
 
   const { data: balance } = useReadContract({
     abi: erc20Abi,
-    address: '0x04392363e80364d10bddb2318297277d50f50c43',
+    address: '0xE38358978A6A4a86D328c88bcEe52112EC034846',
     functionName: 'balanceOf',
     args: ['0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248'],
   });
@@ -52,7 +52,7 @@ export default function BorrowPage() {
   const handleApproval = async () => {
     await writeApproval({
       abi: erc20Abi,
-      address: '0x04392363e80364d10bddb2318297277d50f50c43',
+      address: '0xE38358978A6A4a86D328c88bcEe52112EC034846',
       functionName: 'approve',
       args: ['0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248', BigInt(1000)],
     });
