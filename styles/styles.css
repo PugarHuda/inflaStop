@@ -1,0 +1,29 @@
+/* CSS untuk menempatkan Card di pojok kanan atas */
+.card-container {
+  position: absolute;
+  top: 80px;  /* Menyesuaikan jarak dari navbar (ganti sesuai kebutuhan) */
+  right: 16px; /* Menempatkan di pojok kanan */
+  z-index: 20; /* Memastikan berada di atas elemen lainnya */
+  padding: 16px;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #e5e7eb; /* Warna border untuk terang */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card.dark-mode {
+  background-color: #2d3748; /* Warna background untuk mode gelap */
+  border-color: #4a5568; /* Warna border untuk mode gelap */
+}
+
+.card-body p {
+  font-size: 1.125rem; /* Ukuran teks */
+  font-weight: 700;
+  color: #000000; /* Warna teks untuk terang */
+}
+
+.card-body p.dark-mode {
+  color: #ffffff; /* Warna teks untuk gelap */
+}
