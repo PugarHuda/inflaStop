@@ -6,19 +6,26 @@ import { button as buttonStyles } from "@nextui-org/theme";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 
 export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <div className="inline-block max-w-xl text-center justify-center">
-        <span className={title()}>Make&nbsp;</span>
-        <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-        <br />
-        <span className={title()}>
-          websites regardless of your design experience.
+        <Card className="card ">
+          <CardBody>
+            <p>APY 29%</p>
+          </CardBody>
+        </Card>
+        <span className={title()}>StableCoin AntiInflation &nbsp;</span>
+        <span className={title({ color: "violet" })}>
+          Protect Value, Achieve Stability &nbsp;
         </span>
+        <br />
+        <span className={title()}></span>
         <div className={subtitle({ class: "mt-4" })}>
-          Beautiful, fast and modern React UI library.
+          A blockchain-based solution designed to safeguard your assets from
+          inflation while providing stability and growth opportunities.
         </div>
       </div>
 
@@ -30,26 +37,26 @@ export default function Home() {
             radius: "full",
             variant: "shadow",
           })}
-          href={siteConfig.links.docs}
+          href="/borrow"
         >
-          Documentation
+          Start
         </Link>
-        <Link
+        {/* <Link
           isExternal
           className={buttonStyles({ variant: "bordered", radius: "full" })}
           href={siteConfig.links.github}
         >
           <GithubIcon size={20} />
           GitHub
-        </Link>
+        </Link> */}
       </div>
 
       <div className="mt-8">
-        <Snippet hideCopyButton hideSymbol variant="bordered">
+        {/* <Snippet hideCopyButton hideSymbol variant="bordered">
           <span>
             Get started by editing <Code color="primary">app/page.tsx</Code>
           </span>
-        </Snippet>
+        </Snippet> */}
       </div>
     </section>
   );

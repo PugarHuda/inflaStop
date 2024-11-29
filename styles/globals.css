@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card {
+  position: absolute;
+  top: 70px; /* Jarak dari navbar */
+  right: 20px; /* Jarak dari tepi kanan */
+  z-index: 1000; /* Pastikan kartu berada di atas elemen lain */
+}

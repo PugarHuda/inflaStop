@@ -2,11 +2,26 @@
 
 import React from "react";
 import { title } from "@/components/primitives";
-import { Card, CardHeader, CardBody, CardFooter, Divider, Input, Button, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Pagination, getKeyValue, } from "@nextui-org/react";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Divider,
+  Input,
+  Button,
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Pagination,
+  getKeyValue,
+} from "@nextui-org/react";
 import { users } from "./data";
 
 export default function DocsPage() {
-
   const [page, setPage] = React.useState(1);
   const rowsPerPage = 10;
 
@@ -20,12 +35,14 @@ export default function DocsPage() {
   }, [page, users]);
 
   return (
-    <div>      
+    <div>
       <div className="w-100 flex justify-center">
         <Card className="min-w-[500px]">
           <CardHeader className="flex gap-3">
             <div className="flex flex-col text-start">
-              <p className="text-md">Withdraw <strong>AICoin</strong></p>
+              <p className="text-md">
+                Withdraw <strong>INFLASTOP</strong>
+              </p>
             </div>
           </CardHeader>
           <Divider />
@@ -33,7 +50,7 @@ export default function DocsPage() {
             <Input type="number" label="Amount" placeholder="0.00" />
             <div className="flex gap-2">
               <div className="p-4 flex-grow">
-                <p>AICoin</p>
+                <p>INFLASTOP</p>
                 <p className="text-sm opacity-50">Realtime</p>
                 <p className="text-sm opacity-50">Rate 1-1</p>
               </div>
@@ -84,12 +101,14 @@ export default function DocsPage() {
             <TableColumn>Timestamp</TableColumn>
             <TableColumn>Transaction Hash</TableColumn>
             <TableColumn>Ammount</TableColumn>
-            <TableColumn>User</TableColumn>            
+            <TableColumn>User</TableColumn>
           </TableHeader>
           <TableBody items={items}>
             {(item) => (
               <TableRow key={item.name}>
-                {(columnKey) => <TableCell>{getKeyValue(item, columnKey)}</TableCell>}
+                {(columnKey) => (
+                  <TableCell>{getKeyValue(item, columnKey)}</TableCell>
+                )}
               </TableRow>
             )}
           </TableBody>
