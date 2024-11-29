@@ -247,7 +247,7 @@ export default function BorrowPage() {
                     </div>
                     <Divider className="opacity-50" />
                     <div className="flex gap-4 items-center">
-                      <div className="p-2 bg-content1 rounded-md px-4 font-bold text-sm">3</div>
+                      <div className="p-2 bg-content1 rounded-md px-4 font-bold text-sm">2</div>
                       <p className="mb-0 text-sm min-w-32">Borrow</p>
                       <p className="mb-0 text-sm font-bold flex gap-2">{usde} <span className="opacity-50">IDRe</span> <span><SwapIcon /></span> {idre} <span className="opacity-50">IDRe</span></p>
                       <Button
