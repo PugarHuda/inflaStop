@@ -1,0 +1,3 @@
+[submodule "smartContract"]
+	path = smartContract
+	url = https://github.com/PugarHuda/inflaStop
