@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* CSS untuk menempatkan Card di pojok kanan atas */
 .card {
   position: absolute;
-  top: 70px; /* Jarak dari navbar */
+  top: 70px; /* Jarak dari navbar (sesuaikan sesuai kebutuhan) */
   right: 20px; /* Jarak dari tepi kanan */
-  z-index: 1000; /* Pastikan kartu berada di atas elemen lain */
+  z-index: 1000; /* Memastikan kartu berada di atas elemen lainnya */
 }
