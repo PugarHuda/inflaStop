@@ -131,5 +131,6 @@ Watch the InflaStop platform in action: [Demo Video](https://example.com/demo-vi
 - UI Components: @nextui-org/react, @headlessui/react, @heroicons/react
 - Smart Contract Integration: USDe, sUSDe
 - Virtual TestNets: Tenderly
+- [Smart Contract Reepository](https://github.com/PugarHuda/antiInflasi)
 
 ---
