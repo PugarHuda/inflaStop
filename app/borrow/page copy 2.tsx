@@ -1,32 +1,14 @@
 "use client";
 
 import React from "react";
-import { useCallback, useEffect, useMemo, useState } from "react";
 import { title } from "@/components/primitives";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Divider,
-  Input,
-  Button,
-  Progress,
-  getKeyValue,
-} from "@nextui-org/react";
+import { Card, CardHeader, CardBody, CardFooter, Divider, Input, Button, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Pagination, getKeyValue, } from "@nextui-org/react";
 import { users } from "./data";
 import { WagmiProvider, useWaitForTransactionReceipt, useWriteContract, useReadContract } from 'wagmi';
 import { erc20Abi } from "viem";
 import VaultABI from '../abis/VaultABI.json';
 
-export default function BorrowPage() {
-
-  const [usde, setUsde] = useState(0);
-  const [idre, setIdre] = useState(0);
-  const [percentage, setPercentage] = useState(0);
-  const [isSubmitDisabled, setIsSubmitDisabled] = useState(true);
-
-  const IDRE_PER_USDE = 15000; // 1 USDE = 15000 IDRE
+export default function DocsPage() {
 
   const { data: balance } = useReadContract({
     abi: erc20Abi,
@@ -77,31 +59,6 @@ export default function BorrowPage() {
     hash: mintHash,
   });
 
-  const handleCalculation = (usdeValue, idreValue) => {
-    const usdeToIdre = usdeValue * IDRE_PER_USDE;
-    const total = usdeToIdre;
-
-    if (total === 0) {
-      setPercentage(0); // Default 50% jika input kosong
-      setIsSubmitDisabled(true);
-      return;
-    }
-
-    const idrePercentage = (parseFloat(idreValue) / total) * 100;
-    setPercentage(idrePercentage);
-
-    // Atur tombol submit berdasarkan kondisi
-    if (usdeValue > 0 && idreValue > 0 && idrePercentage <= 80) {
-      setIsSubmitDisabled(false);
-    } else {
-      setIsSubmitDisabled(true);
-    }
-  };
-
-  const handleAmountChange = useCallback((value: string) => {
-    alert(value);
-  }, []);
-
   return (
     <div>
       <div className="grid grid-cols-3 gap-4">
@@ -112,7 +69,7 @@ export default function BorrowPage() {
                 <div className="flex flex-col text-start">
                   <p className="text-md">Deposit</p>
                 </div>
-              </CardHeader>
+              </CardHeader>              
               <CardBody>
                 <Input
                   type="number"
@@ -124,11 +81,6 @@ export default function BorrowPage() {
                       <span className="text-default-400 text-small">USDe</span>
                     </div>
                   }
-                  onChange={(e) => {
-                    const value = e.target.value ? parseFloat(e.target.value) : 0;
-                    setUsde(value);
-                    handleCalculation(value, idre);
-                  }}
                 />
               </CardBody>
             </Card>
@@ -139,18 +91,13 @@ export default function BorrowPage() {
                 <div className="flex flex-col text-start">
                   <p className="text-md">Borrow</p>
                 </div>
-              </CardHeader>
+              </CardHeader>              
               <CardBody>
                 <Input
                   type="number"
                   label="Insert amount you want to borrow"
                   placeholder="0"
                   labelPlacement="inside"
-                  onChange={(e) => {
-                    const value = e.target.value ? parseFloat(e.target.value) : 0;
-                    setIdre(value);
-                    handleCalculation(usde, value);
-                  }}
                   startContent={
                     <div className="pointer-events-none flex items-center">
                       <span className="text-default-400 text-small">IDR</span>
@@ -168,21 +115,14 @@ export default function BorrowPage() {
                   <p className="text-sm opacity-50">Ratio of the collateral value to the borrowed value</p>
                 </div>
                 <div className="flex flex-col text-end w-full">
-                  <p className="text-md">{percentage}%</p>
-                  <p className="text-sm opacity-50">max. 80.00%</p>
+                  <p className="text-md">0.00%</p>
+                  <p className="text-sm opacity-50">max. 79.00%</p>
                 </div>
-              </CardHeader>
-              <CardBody>
-                <Progress
-                  aria-label="Loading..."
-                  value={percentage}
-                  maxValue={100}
-                  onChange={() => { }}
-                  showValueLabel={true}
-                  className="max-w" />
-              </CardBody>
+              </CardHeader>              
+              <CardBody>                
+              </CardBody>              
             </Card>
-            <Button className="mt-5" fullWidth size="md" color="primary" variant="shadow">
+            <Button className="mt-3" fullWidth size="md" color="primary" variant="shadow">
               Borrow
             </Button>
           </div>
