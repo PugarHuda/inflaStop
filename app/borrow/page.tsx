@@ -43,9 +43,9 @@ export default function BorrowPage() {
 
   const { data: balance } = useReadContract({
     abi: erc20Abi,
-    address: "0x04392363e80364d10bddb2318297277d50f50c43",
-    functionName: "balanceOf",
-    args: ["0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248"],
+    address: '0xE38358978A6A4a86D328c88bcEe52112EC034846',
+    functionName: 'balanceOf',
+    args: ['0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248'],
   });
 
   const {
@@ -57,7 +57,7 @@ export default function BorrowPage() {
   const handleApproval = async () => {
     await writeApproval({
       abi: erc20Abi,
-      address: '0x04392363e80364d10bddb2318297277d50f50c43',
+      address: '0xE38358978A6A4a86D328c88bcEe52112EC034846',
       functionName: 'approve',
       args: ['0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248', BigInt(1000)],
     });
@@ -254,7 +254,7 @@ export default function BorrowPage() {
                     <div className="flex gap-4 items-center">
                       <div className="p-2 bg-content1 rounded-md px-4 font-bold text-sm">2</div>
                       <p className="mb-0 text-sm min-w-32">Borrow</p>
-                      <p className="mb-0 text-sm font-bold flex gap-2">{usde} <span className="opacity-50">IDRe</span> <span><SwapIcon /></span> {idre} <span className="opacity-50">IDRe</span></p>
+                      <p className="mb-0 text-sm font-bold flex gap-2">{usde} <span className="opacity-50">USDe</span> <span><SwapIcon /></span> {idre} <span className="opacity-50">IDRe</span></p>
                       <Button
                         className="ms-auto min-w-24"
                         size="sm"
@@ -262,7 +262,7 @@ export default function BorrowPage() {
                         variant="shadow"
                         onClick={() => handleMint()}
                         isLoading={isMintPending || isMintLoading}
-                        isDisabled={isMinted}>
+                        isDisabled={isMinted || !isApproved}>
                         {isMinted ? 'Success' : 'Borrow'}
                       </Button>
                     </div>

@@ -30,7 +30,7 @@ const mainnet = {
   nativeCurrency: { name: 'Holesky Ether', symbol: 'ETH', decimals: 18 },
   rpcUrls: {
     default: {
-      http: ['https://virtual.holesky.rpc.tenderly.co/6faace5f-17e7-4df1-b9f5-61137b55ca63'],
+      http: ['https://virtual.holesky.rpc.tenderly.co/67a54259-db3d-44ed-858b-6166537a4ce8'],
     },
   },
   blockExplorers: {
