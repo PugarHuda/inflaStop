@@ -19,6 +19,7 @@ import { users } from "./data";
 import { WagmiProvider, useWaitForTransactionReceipt, useWriteContract, useReadContract } from 'wagmi';
 import { erc20Abi } from "viem";
 import VaultABI from '../abis/VaultABI.json';
+import {SwapIcon} from '../icons/SwapIcon';
 
 export default function BorrowPage() {
 
@@ -26,6 +27,9 @@ export default function BorrowPage() {
   const [idre, setIdre] = useState<number>(0);
   const [percentage, setPercentage] = useState(0);
   const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
+  const [isOnProcess, setIsOnProcess] = useState<boolean>(false);
+  const [isApproved, setIsApproved] = useState<boolean>(false);
+  const [isMinted, setIsMinted] = useState<boolean>(false);
 
   const IDRE_PER_USDE = 15000; // 1 USDE = 15000 IDRE
   const oneEthInWei = BigInt(10 ** 18);
@@ -48,7 +52,7 @@ export default function BorrowPage() {
       abi: erc20Abi,
       address: '0x04392363e80364d10bddb2318297277d50f50c43',
       functionName: 'approve',
-      args: ['0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248', BigInt(BigInt(usde) * oneEthInWei)],
+      args: ['0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248', BigInt(1000)],
     });
   };
 
@@ -57,6 +61,10 @@ export default function BorrowPage() {
   } = useWaitForTransactionReceipt({
     hash: approvalHash,
   });
+
+  if (statusApproval == 'success' && !isApproved) {
+    setIsApproved(true);
+  }
 
   const {
     data: mintHash,
@@ -69,7 +77,7 @@ export default function BorrowPage() {
       abi: VaultABI,
       address: '0x14df0Ac1D9FaFdEb52b23a2A5Eaf45bDd3C39248',
       functionName: 'mint',
-      args: [BigInt(BigInt(usde) * oneEthInWei), BigInt(100)],
+      args: [BigInt(1000), BigInt(100)],
     });
   };
 
@@ -78,6 +86,10 @@ export default function BorrowPage() {
   } = useWaitForTransactionReceipt({
     hash: mintHash,
   });
+
+  if (statusMint == 'success' && !isMinted) {
+    setIsMinted(true);
+  }
 
   const handleCalculation = (usdeValue: number, idreValue: number) => {
     const usdeToIdre = usdeValue * IDRE_PER_USDE;
@@ -101,7 +113,7 @@ export default function BorrowPage() {
   };
 
   const handleSubmit = () => {
-    alert("Data berhasil dikirim!");
+    setIsOnProcess(true);
   };
 
   return (
@@ -157,7 +169,7 @@ export default function BorrowPage() {
                   }}
                   startContent={
                     <div className="pointer-events-none flex items-center">
-                      <span className="text-default-400 text-small">IDR</span>
+                      <span className="text-default-400 text-small">IDRe</span>
                     </div>
                   }
                 />
@@ -189,18 +201,22 @@ export default function BorrowPage() {
                 )}
               </CardBody>
             </Card>
-            <Button
-              onPress={handleSubmit}
-              isDisabled={isSubmitDisabled}
-              className="mt-5"
-              fullWidth
-              size="md"
-              color="primary"
-              variant="shadow">
-              Borrow
-            </Button>
+            {!isOnProcess && (
+              <Button
+                onPress={handleSubmit}
+                isDisabled={isSubmitDisabled}
+                className="mt-5"
+                fullWidth
+                size="md"
+                color="primary"
+                variant="shadow">
+                Borrow
+              </Button>
+            )}
           </div>
-          <div className="col-span-2 mt-2">
+          <div
+            className="col-span-2"
+            hidden={!isOnProcess}>
             <Card className="w-100 p-3">
               <CardHeader className="flex gap-3">
                 <div className="flex flex-col text-start w-full">
@@ -216,36 +232,28 @@ export default function BorrowPage() {
                     <Button
                       className="ms-auto min-w-24"
                       size="sm"
-                      color="primary"
+                      color={isApproved ? 'default' : 'primary'}
                       variant="shadow"
-                      onClick={() => handleApproval()}>
-                      Approve
-                    </Button>
-                  </div>
-                  <Divider className="opacity-50" />
-                  <div className="flex gap-4 items-center">
-                    <div className="p-2 bg-content1 rounded-md px-4 font-bold text-sm">2</div>
-                    <p className="mb-0 text-sm min-w-32">Deposit USDe</p>
-                    <p className="mb-0 text-sm font-bold">{usde} <span className="opacity-50">USDe</span></p>
-                    <Button
-                      className="ms-auto min-w-24"
-                      size="sm"
-                      color="primary"
-                      variant="shadow">
-                      Deposit
+                      onClick={() => handleApproval()}
+                      isLoading={isApprovalPending || isApprovalLoading}
+                      isDisabled={isApproved}>
+                      {isApproved ? 'Approved' : 'Approve'}
                     </Button>
                   </div>
                   <Divider className="opacity-50" />
                   <div className="flex gap-4 items-center">
                     <div className="p-2 bg-content1 rounded-md px-4 font-bold text-sm">3</div>
-                    <p className="mb-0 text-sm min-w-32">Borrow IDRe</p>
-                    <p className="mb-0 text-sm font-bold">{idre} <span className="opacity-50">IDRe</span></p>
+                    <p className="mb-0 text-sm min-w-32">Borrow</p>
+                    <p className="mb-0 text-sm font-bold flex gap-2">{usde} <span className="opacity-50">IDRe</span> <span><SwapIcon /></span> {idre} <span className="opacity-50">IDRe</span></p>
                     <Button
                       className="ms-auto min-w-24"
                       size="sm"
-                      color="primary"
-                      variant="shadow">
-                      Borrow
+                      color={isMinted ? 'default' : 'primary'}
+                      variant="shadow"
+                      onClick={() => handleMint()}
+                      isLoading={isMintPending || isMintLoading}
+                      isDisabled={isMinted}>
+                      {isApproved ? 'Success' : 'Borrow'}
                     </Button>
                   </div>
                 </div>
