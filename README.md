@@ -1,6 +1,6 @@
 # **InflaStop**
 
-InflaStop is a decentralized, anti-inflation stablecoin platform built on USD backing. It offers interest-free loans, yield-based funding, and a transparent ecosystem for users to manage and grow their financial assets effectively.
+InflaStop is a decentralized, anti-inflation stablecoin platform built on USDe backing. It offers interest-free loans, yield-based funding, and a transparent ecosystem for users to manage and grow their financial assets effectively.
 
 ---
 
@@ -38,7 +38,7 @@ Traditional financial systems are often plagued by:
 
 InflaStop addresses these challenges by offering:
 
-- **Inflation Protection**: A USD-backed stablecoin ensures stability and security.
+- **Inflation Protection**: A USDe-backed stablecoin ensures stability and security.
 - **No-Interest Loans**: Borrow without interest and repay seamlessly from yield.
 - **Fair Yield Distribution**:
   - 80% of the yield is returned to users.
@@ -49,7 +49,7 @@ InflaStop addresses these challenges by offering:
 
 ## 🏆 **Key Features**
 
-1. **Stablecoin Backed by USD**: A reliable and inflation-proof digital asset.
+1. **Stablecoin Backed by USDe**: A reliable and inflation-proof digital asset.
 2. **Interest-Free Loans**: Easy borrowing without additional financial stress.
 3. **Yield-Based Ecosystem**:
    - Borrow repayments are funded through generated yield.
@@ -63,7 +63,7 @@ InflaStop addresses these challenges by offering:
 
 ### **Staking by Users**
 
-Users deposit stablecoins (backed by USD) on the InflaStop platform. The funds are invested to generate sustainable yield.
+Users deposit stablecoins (backed by USDe) on the InflaStop platform. The funds are invested to generate sustainable yield.
 
 ### **Yield Distribution**
 
@@ -118,10 +118,11 @@ Watch the InflaStop platform in action: [Demo Video](https://example.com/demo-vi
 
 ## 📸 **Screenshots**
 
-| **Feature** | **Preview**                                 |
-| ----------- | ------------------------------------------- |
-| **Deposit** | ![Deposit](https://example.com/deposit.jpg) |
-| **Borrow**  | ![Borrow](https://example.com/loan.jpg)     |
+| **Feature** | **Preview**                    |
+| ----------- | ------------------------------ |
+| **Deposit** | ![Deposit](assets/Deposit.png) |
+| **Borrow**  | ![Borrow](assets/Borrow.png)   |
+| **Home**    | ![Home](assets/Home.png)       |
 
 ---
 
