@@ -4,7 +4,7 @@ InflaStop is a decentralized, anti-inflation stablecoin platform built on USDe b
 
 ---
 
-## 🌍 **Our Mission**
+## **Our Mission**
 
 To empower individuals with a stable financial system that combats inflation, eliminates interest burdens, and maximizes yield for sustainable economic growth.
 
