@@ -112,7 +112,7 @@ Users can monitor transactions, yield generation, and fund utilization via an on
 
 ## 🎥 **Demo**
 
-Watch the InflaStop platform in action: [Demo Video](https://example.com/demo-video)
+Watch the InflaStop platform in action: [Demo Video](https://drive.google.com/file/d/1tsmZY7Ps8stLbyNuE_xDKpE89lKz5hj8/view?usp=sharing)
 
 ---
 
